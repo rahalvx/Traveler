@@ -42,7 +42,7 @@ function displayProducts() {
         productCard.classList.add('product-card');
         
         productCard.innerHTML = `
-            <img src="${product.image}" alt="${product.name}" class="product-img">
+            <img loading="lazy" src="${product.image}" alt="${product.name}" class="product-img">
             <div class="product-info">
                 <h3 class="product-title">${product.name}</h3>
                 <span class="product-price">${product.price}</span>
@@ -60,7 +60,8 @@ function displayProducts() {
 function orderViaWhatsapp(name, price) {
     const message = `مرحباً متجر رحال، أرغب بطلب المنتج التالي:%0a*المنتج:* ${name}%0a*السعر:* ${price}%0aيرجى تأكيد الطلب.`;
     const url = `https://wa.me/${whatsappNumber}?text=${message}`;
-    window.open(url, '_blank');
+    const win = window.open(url, '_blank');
+    if (win) win.opener = null;
 }
 
 // تشغيل الدالة عند تحميل الصفحة
